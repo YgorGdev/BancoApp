@@ -1,57 +1,33 @@
-package BancoApp;
+# BancoApp
 
-import BancoApp.factory.ContaFactory;
-import BancoApp.models.Conta;
+Este projeto é uma aplicação bancária simples desenvolvida em Java, que demonstra o uso de POO (Programação Orientada a Objetos). A aplicação permite a criação de diferentes tipos de contas bancárias, depósitos, saques e a busca por contas existentes.
 
-import java.util.HashMap;
-import java.util.Map;
+## Funcionalidades
 
-public class Banco {
-    private Map<String, Conta> contas = new HashMap<>();
+- Criar contas bancárias de diferentes tipos:
+  - Conta Padrão
+  - Conta com Limite
+  - Conta Especial
+  - Conta de Estudante
+  - Conta Poupança
+- Depositar valores nas contas.
+- Sacar valores das contas, com tratamento de exceções para saques inválidos.
+- Buscar contas pelo número da conta.
 
-    public Conta criarConta(String tipo, String numeroConta) {
-        System.out.println("Criando conta do tipo: " + tipo + " com número: " + numeroConta);
-        Conta conta = ContaFactory.criarConta(tipo, numeroConta);
-        contas.put(numeroConta, conta);
-        System.out.println("Conta criada com sucesso: " + conta);
-        return conta;
-    }
+## Estrutura do Projeto
 
-    public Conta buscarConta(String numeroConta) {
-        System.out.println("Buscando conta com número: " + numeroConta);
-        Conta conta = contas.get(numeroConta);
-        if (conta != null) {
-            System.out.println("Conta encontrada: " + conta);
-        } else {
-            System.out.println("Conta com número " + numeroConta + " não encontrada.");
-        }
-        return conta;
-    }
+- **Banco**: Classe principal que gerencia as contas bancárias.
+- **Conta**: Classe base que define a estrutura de uma conta bancária.
+- **ContaFactory**: Classe responsável por criar instâncias de diferentes tipos de contas.
+- **Tipos de Conta**: Classes que herdam de `Conta`, representando os diferentes tipos de conta (e.g., `ContaPadrao`, `ContaComLimite`, `ContaEspecial`, `ContaDeEstudante`, `ContaPoupanca`).
 
-    public void depositar(String numeroConta, double valor) {
-        System.out.println("Depositando valor de " + valor + " na conta com número: " + numeroConta);
-        Conta conta = buscarConta(numeroConta);
-        if (conta != null) {
-            conta.depositar(valor);
-            System.out.println("Depósito realizado com sucesso. Novo saldo: " + conta.getSaldo());
-        } else {
-            System.out.println("Depósito falhou. Conta não encontrada.");
-        }
-    }
+## Como Executar
 
-    public void sacar(String numeroConta, double valor) throws Exception {
-        System.out.println("Sacando valor de " + valor + " da conta com número: " + numeroConta);
-        Conta conta = buscarConta(numeroConta);
-        if (conta != null) {
-            try {
-                conta.sacar(valor);
-                System.out.println("Saque realizado com sucesso. Novo saldo: " + conta.getSaldo());
-            } catch (Exception e) {
-                System.out.println("Erro ao sacar: " + e.getMessage());
-                throw e;
-            }
-        } else {
-            System.out.println("Saque falhou. Conta não encontrada.");
-        }
-    }
-}
+Para executar o projeto, siga os passos abaixo:
+
+1. Certifique-se de ter o Java JDK instalado em sua máquina. Você pode baixar o JDK em [Oracle's website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) ou usar uma versão OpenJDK.
+   
+2. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/YgorGdev/BancoApp.git
